@@ -1,11 +1,11 @@
 module.exports = config:
   files:
     javascripts: joinTo:
-      'vendor.js': /^bower_components\//
-      'app.js': /^(?!bower_components\/)/
+      'js/vendor.js': /^bower_components\//
+      'js/app.js': /^(?!bower_components\/)/
     stylesheets: joinTo:
-      'vendor.css': /^bower_components\//
-      'app.css': /^(?!bower_components\/)/
+      'css/vendor.css': /^bower_components\//
+      'css/app.css': /^(?!bower_components\/)/
   overrides:
     production:
       sourceMaps: true
