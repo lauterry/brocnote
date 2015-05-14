@@ -226,8 +226,8 @@ var MaterializeInput = React.createClass({displayName: 'MaterializeInput',
 	render: function () {
 		return (
 			React.createElement("div", {className: (this.props.className || '') + " input-field"}, 
-				React.createElement("input", {placeholder: this.props.placeholder, type: this.props.type, className: "validate"}, 
-					React.createElement("label", null, this.props.label)
+				React.createElement("input", {id: this.props.label, placeholder: this.props.placeholder, type: this.props.type, className: "validate"}, 
+					React.createElement("label", {htmlFor: this.props.label}, this.props.label)
 				)
 			)
 		)
