@@ -2,5 +2,9 @@
 body {
   padding-top: 20px; }
 
+/* line 5, stdin */
+.dropdown-content {
+  z-index: 2; }
+
 
 /*# sourceMappingURL=app.css.map*/
