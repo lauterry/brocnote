@@ -13,7 +13,7 @@ var MaterializeSelect = React.createClass({
 
 	render: function () {
 		var options = this.props.options.map(function (option) {
-			return <option value={option.value}>{option.label}</option>
+			return <option value={option.value} key={option.value}>{option.label}</option>
 		});
 
 		return (
