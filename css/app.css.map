@@ -1,0 +1,1 @@
+{"version":3,"sources":["app/styles/app.scss"],"names":[],"mappings":"AAAA;AACA;AACA;AACA","file":"public/css/app.css","sourcesContent":["/* line 1, stdin */\nbody {\n  padding-top: 20px; }\n"]}

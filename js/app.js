@@ -178,6 +178,7 @@ module.exports = App;
 
 require.register("components/BrocNote", function(exports, require, module) {
 var MaterializeSelect = require('components/MaterializeSelect');
+var MaterializeInput = require('components/MaterializeInput');
 
 var BrocNote = React.createClass({displayName: 'BrocNote',
 
@@ -200,7 +201,10 @@ var BrocNote = React.createClass({displayName: 'BrocNote',
 		return (
 			React.createElement("div", {className: "container"}, 
 				React.createElement("div", {className: "row"}, 
-					React.createElement(MaterializeSelect, {className: "col s12", options: this.state.categories})
+					React.createElement(MaterializeSelect, {className: "col s12", options: this.state.categories}), 
+					React.createElement(MaterializeInput, {className: "col s6", label: "Nombre", type: "tel"}), 
+					React.createElement(MaterializeInput, {className: "col s6", label: "Prix (€)", type: "tel"}), 
+					React.createElement("button", {className: "col s12 waves-effect waves-light btn-large green"}, "Ajouter")
 				)
 			)
 		)
@@ -208,6 +212,29 @@ var BrocNote = React.createClass({displayName: 'BrocNote',
 });
 
 module.exports = BrocNote;
+});
+
+require.register("components/MaterializeInput", function(exports, require, module) {
+var MaterializeInput = React.createClass({displayName: 'MaterializeInput',
+
+	propsType: {
+		placeholder: React.PropTypes.string,
+		type: React.PropTypes.string,
+		label: React.PropTypes.string
+	},
+
+	render: function () {
+		return (
+			React.createElement("div", {className: (this.props.className || '') + " input-field"}, 
+				React.createElement("input", {placeholder: this.props.placeholder, type: this.props.type, className: "validate"}, 
+					React.createElement("label", null, this.props.label)
+				)
+			)
+		)
+	}
+});
+
+module.exports = MaterializeInput;
 });
 
 require.register("components/MaterializeSelect", function(exports, require, module) {
