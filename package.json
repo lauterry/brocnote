@@ -1,0 +1,16 @@
+{
+  "name": "vertical-timeline",
+  "version": "1.0.0",
+  "description": "",
+  "license": "MIT",
+  "private": true,
+  "devDependencies": {
+    "brunch": "^1.8.2",
+    "javascript-brunch": "^1.7.1",
+    "sass-brunch": "^1.8.10",
+    "css-brunch": "^1.7.0",
+    "auto-reload-brunch": "^1.7.8",
+    "gh-pages": "^0.2.0",
+    "react-brunch": "^1.0.9"
+  }
+}
