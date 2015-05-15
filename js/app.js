@@ -363,7 +363,6 @@ var MaterializeSelect = React.createClass({displayName: 'MaterializeSelect',
 
 		return (
 			React.createElement("div", {className: (this.props.className || '')}, 
-				React.createElement("label", null, "Objets"), 
 				React.createElement("select", {className: "browser-default", ref: "select", value: this.props.selectedValue, onChange: this.props.onChange}, 
 					options
 				)
