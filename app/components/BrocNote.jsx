@@ -84,8 +84,8 @@ var BrocNote = React.createClass({
 					<table className="bordered">
 						<thead>
 							<tr>
-								<th data-field="object">Object</th>
-								<th data-field="count">Nombre</th>
+								<th data-field="object">Type</th>
+								<th data-field="count">Qté</th>
 								<th data-field="price">Prix</th>
 							</tr>
 						</thead>
@@ -97,7 +97,7 @@ var BrocNote = React.createClass({
 									return <tr className="collection-item">
 										<td>{brocante.object}</td>
 										<td>{brocante.count}</td>
-										<td>{brocante.price}</td>
+										<td>{brocante.price} €</td>
 									</tr>
 								})
 							}
