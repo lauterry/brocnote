@@ -10,8 +10,8 @@ var BrocNote = React.createClass({
 	getInitialState: function () {
 		return {
 			brocantes : [],
-			count: 0,
-			price: 0,
+			count: undefined,
+			price: undefined,
 			object: "vetements",
 			categories : [{
 				value: "vetements",
@@ -33,12 +33,12 @@ var BrocNote = React.createClass({
 	addPurchase: function () {
 		this.firebaseRefs["brocantes"].push({
 			object: this.state.object,
-			count: this.state.count,
-			price: this.state.price
+			count: this.state.count || 0,
+			price: this.state.price || 0
 	 	});
 		this.setState({
-			count: 0,
-			price: 0,
+			count: undefined,
+			price: undefined,
 			object: "vetements"
 		});
 	},
