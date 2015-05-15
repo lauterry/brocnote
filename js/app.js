@@ -283,8 +283,8 @@ var BrocNote = React.createClass({displayName: 'BrocNote',
 					React.createElement("table", {className: "bordered"}, 
 						React.createElement("thead", null, 
 							React.createElement("tr", null, 
-								React.createElement("th", {'data-field': "object"}, "Object"), 
-								React.createElement("th", {'data-field': "count"}, "Nombre"), 
+								React.createElement("th", {'data-field': "object"}, "Type"), 
+								React.createElement("th", {'data-field': "count"}, "Qté"), 
 								React.createElement("th", {'data-field': "price"}, "Prix")
 							)
 						), 
@@ -296,7 +296,7 @@ var BrocNote = React.createClass({displayName: 'BrocNote',
 									return React.createElement("tr", {className: "collection-item"}, 
 										React.createElement("td", null, brocante.object), 
 										React.createElement("td", null, brocante.count), 
-										React.createElement("td", null, brocante.price)
+										React.createElement("td", null, brocante.price, " €")
 									)
 								})
 							
