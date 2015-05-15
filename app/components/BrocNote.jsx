@@ -31,10 +31,12 @@ var BrocNote = React.createClass({
 	},
 
 	addPurchase: function () {
+		var date = moment().valueOf();
 		this.firebaseRefs["brocantes"].push({
 			object: this.state.object,
 			count: this.state.count || 0,
-			price: this.state.price || 0
+			price: this.state.price || 0,
+			added: date
 	 	});
 		this.setState({
 			count: undefined,
@@ -90,7 +92,8 @@ var BrocNote = React.createClass({
 
 						<tbody>
 							{
-								this.state.brocantes.map(function(brocante){
+
+								_.sortBy(this.state.brocantes, "added").reverse().map(function(brocante){
 									return <tr className="collection-item">
 										<td>{brocante.object}</td>
 										<td>{brocante.count}</td>
