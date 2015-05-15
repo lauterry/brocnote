@@ -264,10 +264,16 @@ var BrocNote = React.createClass({displayName: 'BrocNote',
 		return (
 			React.createElement("div", {className: "container"}, 
 				React.createElement("div", {className: "row"}, 
-					React.createElement(MaterializeSelect, {className: "col s12", options: this.state.categories, selectedValue: this.state.object, onChange: this.updateObject}), 
-					React.createElement(MaterializeInput, {className: "col s6", name: "count", label: "Nombre", type: "tel", value: this.state.count, onChange: this.updateCount}), 
-					React.createElement(MaterializeInput, {className: "col s6", name: "price", label: "Prix (€)", type: "tel", value: this.state.price, onChange: this.updatePrice}), 
-					React.createElement("button", {className: "col s12 waves-effect waves-light btn-large green", onClick: this.addPurchase}, "Ajouter")
+
+					React.createElement("div", {id: "form-block", className: "card grey lighten-5"}, 
+						React.createElement("div", {className: "card-content"}, 
+							React.createElement(MaterializeSelect, {className: "col s12", options: this.state.categories, selectedValue: this.state.object, onChange: this.updateObject}), 
+							React.createElement(MaterializeInput, {className: "col s6", name: "count", label: "Nombre", type: "tel", value: this.state.count, onChange: this.updateCount}), 
+							React.createElement(MaterializeInput, {className: "col s6", name: "price", label: "Prix (€)", type: "tel", value: this.state.price, onChange: this.updatePrice}), 
+							React.createElement("button", {className: "col s12 waves-effect waves-light btn-large green", onClick: this.addPurchase}, "Ajouter")
+						)
+					)
+
 				), 
 
 
