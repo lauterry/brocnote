@@ -164,11 +164,14 @@
 require.register("app", function(exports, require, module) {
 "use strict";
 
-var BrocNote = require('components/BrocNote');
+var Router = ReactRouter;
+var routes = require('routes');
 
 var App = {
 	init: function init() {
-		React.render(React.createElement(BrocNote, null), document.getElementById('main'));
+		Router.run(routes, function (Handler) {
+			React.render(React.createElement(Handler, null), document.getElementById('main'));
+		});
 	}
 };
 
@@ -176,14 +179,39 @@ module.exports = App;
 
 });
 
+require.register("components/Application", function(exports, require, module) {
+var Router = ReactRouter;
+var RouteHandler = Router.RouteHandler;
+
+var Application = React.createClass({displayName: 'Application',
+	render: function () {
+		return (
+			React.createElement("div", null, 
+				React.createElement(RouteHandler, null)
+			)
+		);
+	}
+});
+
+module.exports = Application;
+});
+
 require.register("components/BrocNote", function(exports, require, module) {
+var Router = ReactRouter;
+var RouteHandler = Router.RouteHandler;
 var MaterializeSelect = require('components/MaterializeSelect');
 var MaterializeInput = require('components/MaterializeInput');
 
 var BrocNote = React.createClass({displayName: 'BrocNote',
 
+	mixins: [ReactFireMixin],
+
 	getInitialState: function () {
 		return {
+			brocantes : [],
+			count: 0,
+			price: 0,
+			object: "vetements",
 			categories : [{
 				value: "vetements",
 				label: "Vêtements"
@@ -197,15 +225,76 @@ var BrocNote = React.createClass({displayName: 'BrocNote',
 		}
 	},
 
+	componentWillMount: function() {
+		this.bindAsArray(new Firebase("https://brocnote.firebaseio.com/brocantes"), "brocantes");
+	},
+
+	addPurchase: function () {
+		this.firebaseRefs["brocantes"].push({
+			object: this.state.object,
+			count: this.state.count,
+			price: this.state.price
+	 	});
+		this.setState({
+			count: 0,
+			price: 0,
+			object: "vetements"
+		});
+	},
+
+	updateCount: function (ev) {
+		this.setState({
+			count: ev.target.value
+		});
+	},
+
+	updatePrice: function (ev) {
+		this.setState({
+			price: ev.target.value
+		});
+	},
+
+	updateObject: function (ev) {
+		this.setState({
+			object: ev.target.value
+		});
+	},
+
 	render: function () {
 		return (
 			React.createElement("div", {className: "container"}, 
 				React.createElement("div", {className: "row"}, 
-					React.createElement(MaterializeSelect, {className: "col s12", options: this.state.categories}), 
-					React.createElement(MaterializeInput, {className: "col s6", name: "count", label: "Nombre", type: "tel"}), 
-					React.createElement(MaterializeInput, {className: "col s6", name: "price", label: "Prix (€)", type: "tel"}), 
-					React.createElement("button", {className: "col s12 waves-effect waves-light btn-large green"}, "Ajouter")
-				)
+					React.createElement(MaterializeSelect, {className: "col s12", options: this.state.categories, selectedValue: this.state.object, onChange: this.updateObject}), 
+					React.createElement(MaterializeInput, {className: "col s6", name: "count", label: "Nombre", type: "tel", value: this.state.count, onChange: this.updateCount}), 
+					React.createElement(MaterializeInput, {className: "col s6", name: "price", label: "Prix (€)", type: "tel", value: this.state.price, onChange: this.updatePrice}), 
+					React.createElement("button", {className: "col s12 waves-effect waves-light btn-large green", onClick: this.addPurchase}, "Ajouter")
+				), 
+
+
+				React.createElement("div", {clasName: "row"}, 
+					React.createElement("table", {className: "bordered"}, 
+						React.createElement("thead", null, 
+							React.createElement("tr", null, 
+								React.createElement("th", {'data-field': "object"}, "Object"), 
+								React.createElement("th", {'data-field': "count"}, "Nombre"), 
+								React.createElement("th", {'data-field': "price"}, "Prix")
+							)
+						), 
+
+						React.createElement("tbody", null, 
+							
+								this.state.brocantes.map(function(brocante){
+									return React.createElement("tr", {className: "collection-item"}, 
+										React.createElement("td", null, brocante.object), 
+										React.createElement("td", null, brocante.count), 
+										React.createElement("td", null, brocante.price)
+									)
+								})
+							
+						)
+					)
+				), 
+				React.createElement(RouteHandler, null)
 			)
 		)
 	}
@@ -222,12 +311,19 @@ var MaterializeInput = React.createClass({displayName: 'MaterializeInput',
 		type: React.PropTypes.string,
 		label: React.PropTypes.string,
 		name: React.PropTypes.string,
+		value: React.PropTypes.string,
+		onChange: React.PropTypes.func
 	},
 
 	render: function () {
 		return (
 			React.createElement("div", {className: (this.props.className || '') + " input-field"}, 
-				React.createElement("input", {id: this.props.name, placeholder: this.props.placeholder, type: this.props.type, className: "validate"}, 
+				React.createElement("input", {id: this.props.name, 
+					placeholder: this.props.placeholder, 
+					type: this.props.type, 
+					className: "validate", 
+					onChange: this.props.onChange, 
+					value: this.props.value}, 
 					React.createElement("label", {htmlFor: this.props.name}, this.props.label)
 				)
 			)
@@ -242,6 +338,8 @@ require.register("components/MaterializeSelect", function(exports, require, modu
 var MaterializeSelect = React.createClass({displayName: 'MaterializeSelect',
 
 	propsType: {
+		selectedValue:  React.PropTypes.string,
+		onChange: React.PropTypes.func,
 		options: React.PropTypes.arrayOf(React.PropTypes.shape({
 			value: React.PropTypes.string,
 			label: React.PropTypes.string
@@ -249,7 +347,7 @@ var MaterializeSelect = React.createClass({displayName: 'MaterializeSelect',
 	},
 
 	componentDidMount: function () {
-		$(React.findDOMNode(this.refs.categories)).material_select();
+		$(React.findDOMNode(this.refs.select)).material_select();
 	},
 
 	render: function () {
@@ -258,18 +356,35 @@ var MaterializeSelect = React.createClass({displayName: 'MaterializeSelect',
 		});
 
 		return (
-			React.createElement("div", {className: (this.props.className || '') + " input-field"}, 
-				React.createElement("select", {ref: "categories"}, 
-					React.createElement("option", {defaultValue: "0", disabled: true}, "Choisir une catégorie"), 
+			React.createElement("div", {className: (this.props.className || '')}, 
+				React.createElement("label", null, "Objets"), 
+				React.createElement("select", {className: "browser-default", ref: "select", value: this.props.selectedValue, onChange: this.props.onChange}, 
+					React.createElement("option", {value: "0", disabled: true}, "Choisir une catégorie"), 
 					options
-				), 
-				React.createElement("label", null, "Objets")
+				)
 			)
 		)
 	}
 });
 
 module.exports = MaterializeSelect;
+});
+
+require.register("routes", function(exports, require, module) {
+var Router = ReactRouter;
+var Route = Router.Route;
+var DefaultRoute = Router.DefaultRoute;
+var Application = require('components/Application');
+var BrocNote = require('components/BrocNote');
+
+var routes = (
+	React.createElement(Route, {name: "app", path: "/", handler: Application}, 
+		React.createElement(DefaultRoute, {handler: BrocNote})
+	)
+);
+
+
+module.exports = routes;
 });
 
 
