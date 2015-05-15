@@ -365,7 +365,6 @@ var MaterializeSelect = React.createClass({displayName: 'MaterializeSelect',
 			React.createElement("div", {className: (this.props.className || '')}, 
 				React.createElement("label", null, "Objets"), 
 				React.createElement("select", {className: "browser-default", ref: "select", value: this.props.selectedValue, onChange: this.props.onChange}, 
-					React.createElement("option", {value: "0", disabled: true}, "Choisir une catégorie"), 
 					options
 				)
 			)
