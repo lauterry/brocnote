@@ -17,7 +17,8 @@
   "dependencies": {
     "react": "~0.13.2",
     "reactfire": "~0.4.0",
-    "materialize": "~0.96.1"
+    "materialize": "~0.96.1",
+    "react-router": "~0.13.3"
   },
   "resolutions": {
     "react": "~0.13.2"

@@ -1,6 +1,8 @@
 var MaterializeSelect = React.createClass({
 
 	propsType: {
+		selectedValue:  React.PropTypes.string,
+		onChange: React.PropTypes.func,
 		options: React.PropTypes.arrayOf(React.PropTypes.shape({
 			value: React.PropTypes.string,
 			label: React.PropTypes.string
@@ -8,7 +10,7 @@ var MaterializeSelect = React.createClass({
 	},
 
 	componentDidMount: function () {
-		$(React.findDOMNode(this.refs.categories)).material_select();
+		$(React.findDOMNode(this.refs.select)).material_select();
 	},
 
 	render: function () {
@@ -17,12 +19,12 @@ var MaterializeSelect = React.createClass({
 		});
 
 		return (
-			<div className={(this.props.className || '') + " input-field"}>
-				<select ref="categories">
-					<option defaultValue="0" disabled>Choisir une catégorie</option>
+			<div className={(this.props.className || '')}>
+				<label>Objets</label>
+				<select className="browser-default" ref="select" value={this.props.selectedValue} onChange={this.props.onChange}>
+					<option value="0" disabled>Choisir une catégorie</option>
 					{options}
 				</select>
-				<label>Objets</label>
 			</div>
 		)
 	}

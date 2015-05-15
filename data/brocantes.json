@@ -1,0 +1,39 @@
+{
+  "brocantes": [
+      {
+        "location": "Fismes",
+        "date": "13/04/2015",
+        "object": "Vêtements",
+        "price": 23,
+        "count": 40
+      },
+      {
+        "location": "Fismes",
+        "date": "13/04/2015",
+        "object": "Jouets",
+        "price": 2,
+        "count": 12
+      },
+      {
+        "location": "Bezannes",
+        "date": "23/06/2015",
+        "object": "Jouets",
+        "price": 23,
+        "count": 12
+      },
+      {
+        "location": "Bezannes",
+        "date": "23/06/2015",
+        "object": "Livres",
+        "price": 4,
+        "count": 10
+      },
+      {
+        "location": "Bezannes",
+        "date": "23/06/2015",
+        "object": "Vêtements",
+        "price": 49,
+        "count": 100
+      }
+  ]
+}

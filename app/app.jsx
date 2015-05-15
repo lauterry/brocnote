@@ -1,10 +1,13 @@
 "use strict";
 
-var BrocNote = require('components/BrocNote');
+var Router = ReactRouter;
+var routes = require('routes');
 
 var App = {
 	init: function init() {
-		React.render(<BrocNote/>, document.getElementById('main'));
+		Router.run(routes, function (Handler) {
+			React.render(<Handler/>, document.getElementById('main'));
+		});
 	}
 };
 
