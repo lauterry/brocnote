@@ -65,10 +65,16 @@ var BrocNote = React.createClass({
 		return (
 			<div className="container">
 				<div className="row">
-					<MaterializeSelect className="col s12" options={this.state.categories} selectedValue={this.state.object} onChange={this.updateObject}></MaterializeSelect>
-					<MaterializeInput className="col s6" name="count" label="Nombre" type="tel" value={this.state.count} onChange={this.updateCount}></MaterializeInput>
-					<MaterializeInput className="col s6" name="price" label="Prix (€)" type="tel" value={this.state.price} onChange={this.updatePrice}></MaterializeInput>
-					<button className="col s12 waves-effect waves-light btn-large green" onClick={this.addPurchase}>Ajouter</button>
+
+					<div id="form-block" className="card grey lighten-5">
+						<div className="card-content">
+							<MaterializeSelect className="col s12" options={this.state.categories} selectedValue={this.state.object} onChange={this.updateObject}></MaterializeSelect>
+							<MaterializeInput className="col s6" name="count" label="Nombre" type="tel" value={this.state.count} onChange={this.updateCount}></MaterializeInput>
+							<MaterializeInput className="col s6" name="price" label="Prix (€)" type="tel" value={this.state.price} onChange={this.updatePrice}></MaterializeInput>
+							<button className="col s12 waves-effect waves-light btn-large green" onClick={this.addPurchase}>Ajouter</button>
+						</div>
+					</div>
+
 				</div>
 
 

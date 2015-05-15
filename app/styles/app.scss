@@ -5,3 +5,9 @@ body {
 .dropdown-content {
 	z-index: 50; // fix dropdown below button
 }
+
+#form-block {
+	.card-content {
+		display: inline-block;
+	}
+}
