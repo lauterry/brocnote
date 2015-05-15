@@ -20,7 +20,6 @@ var MaterializeSelect = React.createClass({
 
 		return (
 			<div className={(this.props.className || '')}>
-				<label>Objets</label>
 				<select className="browser-default" ref="select" value={this.props.selectedValue} onChange={this.props.onChange}>
 					{options}
 				</select>
