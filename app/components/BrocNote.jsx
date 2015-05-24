@@ -64,21 +64,37 @@ var BrocNote = React.createClass({
 	},
 
 	render: function () {
+		var quantityTotal = 0,
+			priceTotal = 0;
+
+		this.state.brocantes.forEach(function (brocante) {
+			quantityTotal = quantityTotal + +brocante.count;
+			priceTotal = priceTotal + +brocante.price;
+		});
+
 		return (
 			<div className="container">
 				<div className="row">
 
 					<div id="form-block" className="card grey lighten-5">
-						<div className="card-content">
+						<form className="card-content">
 							<MaterializeSelect className="col s12" options={this.state.categories} selectedValue={this.state.object} onChange={this.updateObject}></MaterializeSelect>
 							<MaterializeInput className="col s6" name="count" label="Nombre" type="tel" value={this.state.count} onChange={this.updateCount}></MaterializeInput>
 							<MaterializeInput className="col s6" name="price" label="Prix (€)" type="tel" value={this.state.price} onChange={this.updatePrice}></MaterializeInput>
 							<button className="col s12 waves-effect waves-light btn-large green" onClick={this.addPurchase}>Ajouter</button>
-						</div>
+						</form>
 					</div>
 
 				</div>
 
+				<div className="row">
+					<div className="card">
+						<p className="stats">
+							<span className="stats-item">Quantité total : {quantityTotal}</span>
+							<span className="stats-item">Prix total : {priceTotal} €</span>
+						</p>
+					</div>
+				</div>
 
 				<div clasName="row">
 					<table className="bordered">
