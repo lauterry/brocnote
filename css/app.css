@@ -10,5 +10,14 @@ body {
 #form-block .card-content {
   display: inline-block; }
 
+/* line 15, stdin */
+.stats {
+  text-align: center; }
+  /* line 19, stdin */
+  .stats-item {
+    margin-right: 20px;
+    margin-left: 20px;
+    color: #c20c18; }
+
 
 /*# sourceMappingURL=app.css.map*/

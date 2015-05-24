@@ -263,12 +263,20 @@ var BrocNote = React.createClass({displayName: 'BrocNote',
 	},
 
 	render: function () {
+		var quantityTotal = 0,
+			priceTotal = 0;
+
+		this.state.brocantes.forEach(function (brocante) {
+			quantityTotal = quantityTotal + +brocante.count;
+			priceTotal = priceTotal + +brocante.price;
+		});
+
 		return (
 			React.createElement("div", {className: "container"}, 
 				React.createElement("div", {className: "row"}, 
 
 					React.createElement("div", {id: "form-block", className: "card grey lighten-5"}, 
-						React.createElement("div", {className: "card-content"}, 
+						React.createElement("form", {className: "card-content"}, 
 							React.createElement(MaterializeSelect, {className: "col s12", options: this.state.categories, selectedValue: this.state.object, onChange: this.updateObject}), 
 							React.createElement(MaterializeInput, {className: "col s6", name: "count", label: "Nombre", type: "tel", value: this.state.count, onChange: this.updateCount}), 
 							React.createElement(MaterializeInput, {className: "col s6", name: "price", label: "Prix (€)", type: "tel", value: this.state.price, onChange: this.updatePrice}), 
@@ -278,6 +286,14 @@ var BrocNote = React.createClass({displayName: 'BrocNote',
 
 				), 
 
+				React.createElement("div", {className: "row"}, 
+					React.createElement("div", {className: "card"}, 
+						React.createElement("p", {className: "stats"}, 
+							React.createElement("span", {className: "stats-item"}, "Quantité total : ", quantityTotal), 
+							React.createElement("span", {className: "stats-item"}, "Prix total : ", priceTotal, " €")
+						)
+					)
+				), 
 
 				React.createElement("div", {clasName: "row"}, 
 					React.createElement("table", {className: "bordered"}, 
